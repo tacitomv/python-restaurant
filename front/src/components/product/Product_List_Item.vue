@@ -1,35 +1,24 @@
 <template>
-    <div class="card">
-      <div class="card-body">
-        <div class="content">
-          <h4>{{ productItem.title }}</h4>
-          <a
-            class="button is-rounded is-pulled-left"
-            @click="addCartItem(productItem)"
-          >
-            <strong>Add to Cart</strong>
-          </a>
-          <br />
-          <p class="mt-4">
-            {{ productItem.description }}
-          </p>
-        </div>
-        <div class="media">
-          <div class="media-content">
-            <p class="title is-6">{{ productItem.owner }}</p>
-            <p class="subtitle is-7">{{ productItem.email }}</p>
-          </div>
-          <div class="media-right">
-            <a class="button is-primary is-light">
-              <strong>$ {{ productItem.price }}</strong>
-            </a>
-          </div>
-        </div>
-      </div>
+  <div class="card mb-2">
+    <img
+      :src="'/images/' + productItem.image_id + '.jpg'"
+      class="card-img-top"
+      alt=""
+    />
+    <div class="card-body">
+      <h4>{{ productItem.name }}</h4>
+      <p>$ {{ productItem.price }}</p>
+      
+      <button
+        type="button"
+        class="btn btn-primary"
+        @click="addCartItem(productItem)"
+      >Add to Cart</button>
     </div>
+  </div>
 </template>
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from "vuex";
 export default {
   name: "ProductListItem",
   props: ["productItem"],
@@ -38,3 +27,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+img {
+  width: 100%;
+  height: 250px;
+}
+</style>

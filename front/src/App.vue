@@ -1,5 +1,4 @@
 <template>
-  <div>
     <Navbar />
     <div class="container mt-5">
       <div class="row">
@@ -8,7 +7,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 <script>
 import Navbar from "./components/core/Navbar";
@@ -20,9 +18,4 @@ export default {
 };
 </script>
 <style>
-html,
-body {
-  height: 100%;
-  background: #f2f6fa;
-}
 </style>

@@ -1,11 +1,13 @@
 <template>
   <div class="container">
-    <div
-      class="tile is-parent"
-      v-for="productItem in productItems"
-      :key="productItem.id"
-    >
-      <ProductListItem :productItem="productItem" />
+    <div class="row">
+      <div
+        class="col-sm-3"
+        v-for="productItem in productItems"
+        :key="productItem.id"
+      >
+        <ProductListItem :productItem="productItem" />
+      </div>
     </div>
   </div>
 </template>

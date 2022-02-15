@@ -1,31 +1,38 @@
 <template>
-  <div class="box">
-    <div class="cart-item__details">
-      <p class="is-inline">{{cartItem.title}}</p>
-      <div>
+  <div class="col-ms-3">
+    <div class="card">
+      <div class="card-body">
+        <p>{{ cartItem.title }}</p>
         <span class="cart-item--price has-text-info has-text-weight-bold">
-          ${{cartItem.price}} X {{cartItem.quantity}}
+          ${{ cartItem.price }} X {{ cartItem.quantity }}
         </span>
-        
-        <span>
-          <i class="fa fa-arrow-circle-up cart-item__modify" @click="addCartItem(cartItem)"></i>
-          <i class="fa fa-arrow-circle-down cart-item__modify" @click="removeCartItem(cartItem)"></i>
-        </span>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="addCartItem(cartItem)"
+        >
+          + Item
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="removeCartItem(cartItem)"
+        >
+          - Item
+        </button>
       </div>
-      
     </div>
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
-  name: 'CartListItem',
-  props: ['cartItem'],
+  name: "CartListItem",
+  props: ["cartItem"],
   methods: {
-    ...mapActions([
-      'addCartItem',
-      'removeCartItem'
-    ])
-  }
-}
+    ...mapActions(["addCartItem", "removeCartItem"]),
+  },
+};
 </script>
