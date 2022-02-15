@@ -64,6 +64,6 @@ def place_order():
     if data:
         return db.addOrder(data)
     else:
-        return "Error: No acceptable body provided."
+        return "Error: No body provided."
 
 app.run()
