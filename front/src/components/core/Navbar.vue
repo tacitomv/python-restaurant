@@ -15,18 +15,22 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <router-link to="/inventory" class="nav-link">
-              <strong> Inventory</strong>
-            </router-link>
+        <li class="nav-item">
+          <router-link to="/products" class="nav-link">
+            <b>Products</b>
+          </router-link>
         </li>
         <li class="nav-item">
           <router-link to="/cart" class="nav-link">
-              <span>
-                Total cart items:
-                <span> {{ cartQuantity }}</span>
-              </span>
-            </router-link>
+            <b>Cart</b>
+            &nbsp;
+            <span class="badge badge-light">{{ cartQuantity }}</span>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/cart" class="nav-link">
+            <span>Total $ {{ cartTotal }}</span>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -37,10 +41,8 @@ import { mapGetters } from "vuex";
 export default {
   name: "Navbar",
   computed: {
-    ...mapGetters(["cartQuantity"]),
+    ...mapGetters(["cartQuantity", "cartTotal"]),
   },
-  created() {
-    
-  },
+  created() {},
 };
 </script>

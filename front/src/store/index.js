@@ -10,8 +10,19 @@ export default createStore({
     UPDATE_PRODUCT_ITEMS(state, payload) {
       state.productItems = payload;
     },
-    UPDATE_CART_ITEMS(state, payload) {
-      state.cartItems = payload;
+    ADD_CART_ITEMS(state, newCartProduct) {
+      let cartProductExists = false;
+      state.cartItems.map(cartProduct => {
+        cartProduct.quantity = cartProduct.quantity || 1;
+        if (cartProduct.id === newCartProduct.id) {
+          cartProduct.quantity++;
+          cartProductExists = true;
+        }
+      });
+      if (!cartProductExists) {
+        newCartProduct.quantity = 1;
+        state.cartItems.push(newCartProduct);
+      }
     },
   },
   actions: {
@@ -21,7 +32,7 @@ export default createStore({
       });
     },
     addCartItem({ commit }, cartItem) {
-      commit("UPDATE_CART_ITEMS", cartItem);
+      commit("ADD_CART_ITEMS", cartItem);
     },
     removeCartItem({ commit }, cartItem) {
       commit("UPDATE_CART_ITEMS", cartItem);
@@ -44,9 +55,7 @@ export default createStore({
         .toFixed(2);
     },
     cartQuantity: state => {
-      return state.cartItems.reduce((acc, cartItem) => {
-        return cartItem.quantity + acc;
-      }, 0);
+      return state.cartItems.length;
     },
   },
 });

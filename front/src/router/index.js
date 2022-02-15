@@ -4,7 +4,7 @@ import ProductList from '../components/product/Product_List.vue';
 
 const routes = [
   {
-    path: '/inventory',
+    path: '/products',
     component: ProductList
   },
   {
@@ -13,7 +13,7 @@ const routes = [
   },
   {
     path: '/',
-    redirect: '/inventory'
+    redirect: '/products'
   },
 ]
 

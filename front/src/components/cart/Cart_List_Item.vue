@@ -1,29 +1,25 @@
 <template>
-  <div class="col-ms-3">
-    <div class="card">
-      <div class="card-body">
-        <p>{{ cartItem.title }}</p>
-        <span class="cart-item--price has-text-info has-text-weight-bold">
-          ${{ cartItem.price }} X {{ cartItem.quantity }}
-        </span>
+  <div>
+    <h4>{{ cartItem.name }}</h4>
+    <span>
+      ${{ cartItem.price }} X {{ cartItem.quantity }}
+    </span>
 
-        <button
-          type="button"
-          class="btn btn-primary"
-          @click="addCartItem(cartItem)"
-        >
-          + Item
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-primary"
-          @click="removeCartItem(cartItem)"
-        >
-          - Item
-        </button>
-      </div>
-    </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="addCartItem(cartItem)"
+    >
+      +
+    </button>
+    &nbsp;
+    <button
+      type="button"
+      class="btn btn-danger"
+      @click="removeCartItem(cartItem)"
+    >
+      -
+    </button>
   </div>
 </template>
 <script>

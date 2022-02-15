@@ -1,36 +1,38 @@
 <template>
   <div id="cart">
-    <div class="cart--header has-text-centered">
-      <i class="fa fa-2x fa-shopping-cart"></i>
-    </div>
     <p v-if="!cartItems.length" class="cart-empty-text has-text-centered">
-      Add some items to the cart!
+      Add some
+      <router-link to="/products">
+        <strong>items</strong>
+      </router-link>
+      to the cart!
     </p>
-    <ul>
-      <li class="cart-item" v-for="cartItem in cartItems" :key="cartItem.id">
-          <CartListItem :cartItem="cartItem"/>
+    <ul class="list-group">
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+        v-for="cartItem in cartItems"
+        :key="cartItem.id"
+      >
+        <CartListItem :cartItem="cartItem" />
       </li>
-      <div class="notification is-success">
-        <button class="delete"></button>
-        <p>
-          Total Quantity:
-          <span class="has-text-weight-bold">{{ cartQuantity }}</span>
-        </p>
-      </div>
-      <br>
     </ul>
-    <div class="buttons">
-    <button :disabled="!cartItems.length" class="button is-info">
-      Checkout (<span class="has-text-weight-bold">${{ cartTotal }}</span>)
-    </button>
-     
- <button class="button is-danger is-outlined" @click="removeAllCartItems">
-    <span>Delete All items</span>
-    <span class="icon is-small">
-      <i class="fas fa-times"></i>
-    </span>
-  </button>
-       </div>
+    <p>
+      Total Quantity:
+      <span class="has-text-weight-bold">{{ cartQuantity }}</span>
+    </p>
+    <p>
+      Total cost:
+      <span>$ {{ cartTotal }}</span>
+    </p>
+    <div>
+      <button :disabled="!cartItems.length" class="btn btn-success">
+        Checkout
+      </button>
+      &nbsp;
+      <button class="btn btn-danger" @click="removeAllCartItems">
+        Clear Cart
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -39,16 +41,14 @@ import CartListItem from "./Cart_List_Item";
 export default {
   name: "CartList",
   components: {
-    CartListItem
+    CartListItem,
   },
   computed: {
     ...mapGetters(["cartItems", "cartTotal", "cartQuantity"]),
   },
-  created() {
-    this.$store.dispatch("getCartItems");
-  },
+  created() {},
   methods: {
     ...mapActions(["removeAllCartItems"]),
-  }
+  },
 };
 </script>
