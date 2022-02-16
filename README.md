@@ -38,3 +38,7 @@ npm run build
 Flux architecture [introduction and documentation](https://facebook.github.io/flux/).
 
 Internet citizen Muhammed Erdem for this awesome [payment form](https://codepen.io/JavaScriptJunkie/pen/YzzNGeR).
+
+[This post](https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/) about reading and writing a file in python.
+
+Python's [Generator Expressions](https://www.python.org/dev/peps/pep-0289/).

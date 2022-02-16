@@ -1,3 +1,4 @@
+from functools import reduce
 import json
 from unicodedata import decimal
 
@@ -7,8 +8,11 @@ class SimpleDatabase:
     __orderId = 1
 
     def __init__(self):
-        with open('data/db.json', 'r+') as f:
+        with open('data/db.json', 'r') as f:
             self.__data = json.load(f)
+            self.__orderId = max([int(x["id"])
+                                 for x in self.__data["orders"]]) + 1
+            print("orderId = ", self.__orderId)
 
     def getAllItems(cls):
         return cls.__data['items']
@@ -30,6 +34,7 @@ class SimpleDatabase:
         order['id'] = cls.__orderId
         cls.__orderId = cls.__orderId + 1
         cls.__data['orders'].append(order)
+        cls.saveChanges()
         return cls.getAllOrders()
 
     def removeOrder(cls, id):
@@ -49,3 +54,7 @@ class SimpleDatabase:
             cls.__data['orders'][index] = order
             return True
         return False
+
+    def saveChanges(cls):
+        with open('data/db.json', 'w') as f:
+            json.dump(cls.__data, f, indent=4)

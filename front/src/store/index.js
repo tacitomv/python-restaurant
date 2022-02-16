@@ -62,9 +62,15 @@ export default createStore({
     removeAllCartItems({ commit }) {
       commit("DELETE_CART_ITEMS", []);
     },
-    addOrder({ commit, getters }, paymentItem) {
+    addOrder({ commit, getters, dispatch }, paymentItem) {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0");
+      var yyyy = today.getFullYear();
+
       let payload = {
         id: 0,
+        date: dd + "/" + mm + "/" + yyyy,
         payment: paymentItem,
         items: this.state.cartItems,
         total: getters.cartTotal,
@@ -72,6 +78,7 @@ export default createStore({
       };
 
       axios.post(`/api/orders`, payload).then(response => {
+        dispatch('removeAllCartItems', commit);
         commit("UPDATE_ORDERS", response.data);
       });
     },
