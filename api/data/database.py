@@ -4,6 +4,7 @@ from unicodedata import decimal
 
 class SimpleDatabase:
     __data = {}
+    __orderId = 1
 
     def __init__(self):
         with open('data/db.json', 'r+') as f:
@@ -26,8 +27,10 @@ class SimpleDatabase:
         return None
 
     def addOrder(cls, order):
+        order['id'] = cls.__orderId
+        cls.__orderId = cls.__orderId + 1
         cls.__data['orders'].append(order)
-        return True
+        return cls.getAllOrders()
 
     def removeOrder(cls, id):
         if id:

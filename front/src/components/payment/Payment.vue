@@ -207,7 +207,7 @@
           />
         </div>
         <div class="card-input">
-          <label for="cardName" class="card-input__label">Card Holders</label>
+          <label for="cardName" class="card-input__label">Card Holder</label>
           <input
             type="text"
             id="cardName"
@@ -280,7 +280,11 @@
           </div>
         </div>
 
-        <button class="card-form__button">Submit</button>
+        <div class="alert alert-danger" role="alert" v-if="error">
+          Oops! Looks like you have a blank field above...
+        </div>
+
+        <button class="card-form__button" @click="submitPayment">Submit</button>
       </div>
     </div>
   </div>
@@ -305,11 +309,12 @@ export default {
       isCardFlipped: false,
       focusElementStyle: null,
       isInputFocused: false,
+      error: false,
     };
   },
   mounted() {
     this.cardNumberTemp = this.otherCardMask;
-    //document.getElementById("cardNumber").focus();
+    document.getElementById("cardNumber").focus();
   },
   computed: {
     ...mapGetters(["cartItems", "cartTotal", "cartQuantity"]),
@@ -350,6 +355,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["addOrder"]),
     flipCard(status) {
       this.isCardFlipped = status;
     },
@@ -371,6 +377,25 @@ export default {
         }
       }, 300);
       vm.isInputFocused = false;
+    },
+    submitPayment() {
+      if (
+        this.cardName !== "" &&
+        this.cardNumber !== "" &&
+        this.cardMonth !== "" &&
+        this.cardYear !== "" &&
+        this.cardCvv !== ""
+      ) {
+        this.error = false;
+        this.addOrder({
+            cardName: this.cardName,
+            cardNumber: this.cardNumber,
+            cardMonth: this.cardMonth,
+            cardYear: this.cardYear,
+            cardCvv: this.cardCvv
+        });
+        this.$router.push("/payment-success");
+      } else this.error = true;
     },
   },
 };

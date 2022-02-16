@@ -62,7 +62,7 @@ def place_order():
     data = flask.request.get_json()
 
     if data:
-        return db.addOrder(data)
+        return jsonify(db.addOrder(data))
     else:
         return "Error: No body provided."
 

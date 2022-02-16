@@ -13,18 +13,17 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import CartListItem from "./Order_List_Item";
+import Order_List_Item from "./Order_List_Item";
 export default {
   name: "OrderList",
   components: {
-    CartListItem,
+    OrderListItem: Order_List_Item
   },
   computed: {
-    ...mapGetters(["cartItems", "cartTotal", "cartQuantity"]),
+    ...mapGetters(["orders"]),
   },
-  created() {},
-  methods: {
-    ...mapActions(["removeAllCartItems"]),
-  },
+  created() {
+    this.$store.dispatch("getOrders");
+  }
 };
 </script>

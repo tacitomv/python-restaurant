@@ -5,6 +5,7 @@ export default createStore({
   state: {
     productItems: [],
     cartItems: [],
+    orders: [],
   },
   mutations: {
     UPDATE_PRODUCT_ITEMS(state, payload) {
@@ -42,6 +43,9 @@ export default createStore({
     DELETE_CART_ITEMS(state, newCart) {
       state.cartItems = newCart;
     },
+    UPDATE_ORDERS(state, orders) {
+      state.orders = orders;
+    },
   },
   actions: {
     getProductItems({ commit }) {
@@ -58,6 +62,24 @@ export default createStore({
     removeAllCartItems({ commit }) {
       commit("DELETE_CART_ITEMS", []);
     },
+    addOrder({ commit, getters }, paymentItem) {
+      let payload = {
+        id: 0,
+        payment: paymentItem,
+        items: this.state.cartItems,
+        total: getters.cartTotal,
+        quantity: getters.cartQuantity,
+      };
+
+      axios.post(`/api/orders`, payload).then(response => {
+        commit("UPDATE_ORDERS", response.data);
+      });
+    },
+    getOrders({ commit }) {
+      axios.get(`/api/orders/all`).then(response => {
+        commit("UPDATE_ORDERS", response.data);
+      });
+    },
   },
   getters: {
     productItems: state => state.productItems,
@@ -73,10 +95,10 @@ export default createStore({
         .toFixed(2);
     },
     cartQuantity: state => {
-      return state.cartItems
-        .reduce((acc, cartItem) => {
-          return cartItem.quantity + acc;
-        }, 0);
+      return state.cartItems.reduce((acc, cartItem) => {
+        return cartItem.quantity + acc;
+      }, 0);
     },
+    orders: state => state.orders,
   },
 });
