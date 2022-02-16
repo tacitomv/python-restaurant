@@ -1,9 +1,10 @@
 <template>
   <div>
     <h4>{{ cartItem.name }}</h4>
-    <span>
-      ${{ cartItem.price }} X {{ cartItem.quantity }}
-    </span>
+    <p>
+      Price: ${{ cartItem.price }} <br>
+      Quantity: {{ cartItem.quantity }}
+    </p>
 
     <button
       type="button"

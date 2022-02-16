@@ -27,3 +27,7 @@ npm run serve
 ```
 npm run build
 ```
+
+## Thanks
+
+Internet citizen Muhammed Erdem for this awesome [payment form](https://codepen.io/JavaScriptJunkie/pen/YzzNGeR).

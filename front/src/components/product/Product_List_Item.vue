@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-2">
+  <div class="card mb-4 shadow-sm">
     <img
       :src="'/images/' + productItem.image_id + '.jpg'"
       class="card-img-top"

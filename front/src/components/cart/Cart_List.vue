@@ -17,7 +17,7 @@
       </li>
     </ul>
     <p>
-      Total Quantity:
+      Total quantity:
       <span class="has-text-weight-bold">{{ cartQuantity }}</span>
     </p>
     <p>
@@ -25,7 +25,11 @@
       <span>$ {{ cartTotal }}</span>
     </p>
     <div>
-      <button :disabled="!cartItems.length" class="btn btn-success">
+      <button
+        :disabled="cartTotal == 0"
+        class="btn btn-success"
+        @click="goToPayment"
+      >
         Checkout
       </button>
       &nbsp;
@@ -49,6 +53,9 @@ export default {
   created() {},
   methods: {
     ...mapActions(["removeAllCartItems"]),
+    goToPayment(){
+      this.$router.push('/payment')
+    }
   },
 };
 </script>

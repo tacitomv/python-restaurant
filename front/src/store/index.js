@@ -56,7 +56,7 @@ export default createStore({
       commit("REMOVE_CART_ITEMS", cartItem);
     },
     removeAllCartItems({ commit }) {
-      commit("DELETE_CART_ITEMS", {});
+      commit("DELETE_CART_ITEMS", []);
     },
   },
   getters: {

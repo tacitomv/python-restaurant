@@ -32,6 +32,11 @@
             <span>Total $ {{ cartTotal }}</span>
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/orders" class="nav-link">
+            <b>Orders</b>
+          </router-link>
+        </li>
       </ul>
     </div>
   </nav>
